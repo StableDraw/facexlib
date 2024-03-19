@@ -4,7 +4,7 @@ import os
 import torch
 from torchvision.transforms.functional import normalize
 
-from facexlib.detection import init_detection_model
+from ..detection import init_detection_model
 from facexlib.parsing import init_parsing_model
 from facexlib.utils.misc import img2tensor, imwrite
 
@@ -96,11 +96,11 @@ class FaceRestoreHelper(object):
             self.device = device
 
         # init face detection model
-        self.face_det = init_detection_model(det_model, half=False, device=self.device, model_rootpath=model_rootpath)
+        self.face_det = init_detection_model(det_model, half=False, device=self.device, model_rootpath = model_rootpath)
 
         # init face parsing model
         self.use_parse = use_parse
-        self.face_parse = init_parsing_model(model_name='parsenet', device=self.device, model_rootpath=model_rootpath)
+        self.face_parse = init_parsing_model(model_name = "parsenet", device = self.device, model_rootpath = model_rootpath)
 
     def set_upscale_factor(self, upscale_factor):
         self.upscale_factor = upscale_factor

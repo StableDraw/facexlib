@@ -4,6 +4,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from PIL import Image
+from torchvision.models import Weights
 from torchvision.models._utils import IntermediateLayerGetter as IntermediateLayerGetter
 
 from facexlib.detection.align_trans import get_reference_facial_points, warp_and_crop_face
@@ -92,7 +93,7 @@ class RetinaFace(nn.Module):
             self.body = IntermediateLayerGetter(backbone, cfg['return_layers'])
         elif cfg['name'] == 'Resnet50':
             import torchvision.models as models
-            backbone = models.resnet50(pretrained=False)
+            backbone = models.resnet50(weights = None)
             self.body = IntermediateLayerGetter(backbone, cfg['return_layers'])
 
         in_channels_stage2 = cfg['in_channel']
